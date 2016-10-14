@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>
+            An Angular short Example
+        </title>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    </head>
+    <body ng-controller="mainController" ng-cloak>
+        <p ng-bind="small_message">
+            You should not see this message !
+        </p>
+        <p>
+            That's a list example:
+        </p>
+        <ul>
+            <li ng-repeat="element in element_list">
+                <p ng-bind="element"></p>
+            </li>
+        </ul>
+        <p>
+            Here it's a credential form example
+        </p>
+        <input required name="login" ng-model="login" type="text" placeholder="login">
+        <input required ng-model="password" name="password" type="password" placeholder="Password">
+        <p>
+            Login: <span ng-bind="login"></span>
+        </p>
+        <p>
+            Password: <span ng-bind="password"></span>
+        </p>
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('mainController', function($scope) {
+                $scope.small_message = "Hey there !";
+                $scope.element_list = [1, 2, 3, 4, 5];
+            });
+        </script>
+    </body>
+</html>
