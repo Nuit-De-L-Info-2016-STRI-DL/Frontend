@@ -1,0 +1,153 @@
+<!DOCTYPE HTML>
+<html ng-app="Uploader" ng-controller="mainControl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="RSC/css/angular-material.min.css">
+        <link rel="stylesheet" href="RSC/css/css-family=Roboto-200,300,400,600.css">
+        <link rel="stylesheet" href="RSC/css/icon-family-Material+Icons.css">
+        <title>{{::app.name}} {{::app.version}}</title>
+    </head>
+    <body ng-cloak>
+        <!-- NAME AND VERSION -->
+        <md-toolbar class="md-warn">
+            <div class="md-toolbar-tools">
+                <h1>
+                    {{::app.name}}
+                    {{::app.version}}
+                </h1>
+                <span flex> <!-- extending space --> </span>
+                <md-button class="md-icon-button md-raised md-primary" aria-label="need help ?" ng-href="{{::app.wiki_help}}" target="_blank">
+                    <md-tooltip md-direction="left"> Need help ? </md-tooltip>
+                    <md-icon md-font-library="material-icons" class="md-light">help</md-icon>
+                </md-button>
+                <md-button class="md-icon-button md-raised md-primary" aria-label="Bug tracker kanban" ng-href="{{::app.bug_kanban}}" target="_blank">
+                    <md-tooltip md-direction="left"> Bug tracker kanban </md-tooltip>
+                    <md-icon md-font-library="material-icons" class="md-light">donut_large</md-icon>
+                </md-button>
+                <md-button class="md-icon-button md-raised md-primary" aria-label="report a bug" ng-href="{{::app.new_ticket}}" target="_blank">
+                    <md-tooltip md-direction="left"> Report a bug </md-tooltip>
+                    <md-icon md-font-library="material-icons" class="md-light">bug_report</md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <!-- LOADING BAR -->
+        <md-progress-linear ng-if="loading" md-mode="query"></md-progress-linear>
+        <!-- CONTENT -->
+        <md-content class="md-padding">
+            <!-- DESCRIPTION -->
+            <section ng-if="app.description">
+                <md-subheader class="md-primary">
+                    {{::app.description}}
+                </md-subheader>
+            </section>
+            <!-- SEARCH & FILTER ZONE -->
+            <section layout-wrap layout="column" ng-if="searchfilter">
+                <md-subheader class="md-warn">
+                    <md-button class="md-icon-button md-raised md-primary" aria-label="reset filters" ng-click="reset_filters()">
+                        <md-tooltip> Reset filters </md-tooltip>
+                        <md-icon md-font-library="material-icons" class="md-light">clear</md-icon>
+                    </md-button>
+                    Filters
+                </md-subheader>
+                <div layout="row" layout-margin>
+                    <md-input-container flex class="md-block">
+                        <label>Folder name filter</label>
+                        <input ng-model="searchfilter.folder.name" placeholder="Filter folder names with some text" >
+                    </md-input-container>
+                </div>
+                <div layout="row" layout-margin>
+                    <md-input-container flex class="md-block">
+                        <label>File name filter</label>
+                        <input ng-model="searchfilter.file.name" placeholder="Filter file names with some text" >
+                    </md-input-container>
+                </div>
+            </section>
+            <!-- LIST ZONE -->
+            <section flex layout-wrap layout="column">
+                <md-subheader class="md-warn">
+                    <md-button class="md-icon-button md-raised md-primary" aria-label="refresh list" ng-click="refresh_domains()">
+                        <md-tooltip> Refresh folder list </md-tooltip>
+                        <md-icon md-font-library="material-icons" class="md-light">refresh</md-icon>
+                    </md-button>
+                    Folder list
+                </md-subheader>
+                <!-- DOMAIN LIST -->
+                <div ng-repeat="domain in folders | orderBy:'name'" layout="column" layout-margin layout-padding ng-init="show_content = false">
+                    <!-- DOMAIN -->
+                    <div layout="row" layout-align="left center">
+                        <md-button class="md-raised md-primary" aria-label="get this domain details" ng-click="show_content = ! show_content" ng-disabled="domain.folders.length < 1">
+                            <md-icon md-font-library="material-icons" ng-if="!show_content" class="md-light">folder</md-icon>
+                            <md-icon md-font-library="material-icons" ng-if="show_content" class="md-light">folder_open</md-icon>
+                            {{::domain.name}}
+                        </md-button>
+                        <!-- CREATE NEW FOLDER BUTTON -->
+                        <md-button class="md-icon-button md-raised md-primary" aria-label="add a folder" ng-click="add_folder(domain); show_content = true">
+                            <md-tooltip> Create a new folder </md-tooltip>
+                            <md-icon md-font-library="material-icons" class="md-light">add</md-icon>
+                        </md-button>
+                        <!-- EMPTY FOLDER LIST MESSAGE -->
+                        <p ng-if="domain.folders.length < 1"> Currently no folder here </p>
+                    </div>
+                    <!-- FOLDER LIST -->
+                    <div ng-if="show_content" ng-repeat="folder in domain.folders | filter:searchfilter.folder | orderBy:'name'" layout="column" layout-margin ng-init="show_content = false">
+                        <!-- FOLDER -->
+                        <div layout="row" layout-align="left center">
+                            <span flex="5"> <!-- INDENT FOLDER LIST --> </span>
+                            <md-button class="md-raised md-primary" aria-label="get this folder details" ng-click="show_content = ! show_content" ng-disabled="folder.files.length < 1">
+                                <md-icon md-font-library="material-icons" ng-if="!show_content" class="md-light">folder</md-icon>
+                                <md-icon md-font-library="material-icons" ng-if="show_content" class="md-light">folder_open</md-icon>
+                                {{::folder.name}}
+                            </md-button>
+                            <!-- DELETE FOLDER BUTTON -->
+                            <md-button class="md-icon-button md-raised md-warn" aria-label="delete this folder" ng-click="delete_folder(domain, folder)">
+                                <md-tooltip> Delete this folder </md-tooltip>
+                                <md-icon md-font-library="md-icon-button material-icons" class="md-light">delete</md-icon>
+                            </md-button>
+                            <!-- UPLOAD FILE BUTTON -->
+                            <md-button class="md-icon-button md-raised md-primary" aria-label="upload a file" ng-click="upload_file(domain, folder); show_content = true">
+                                <md-tooltip> Upload a file </md-tooltip>
+                                <md-icon md-font-library="material-icons" class="md-light">cloud_upload</md-icon>
+                            </md-button>
+                            <!-- EMPTY FILE LIST MESSAGE -->
+                            <p ng-if="folder.files.length < 1"> Currently no file here </p>
+                        </div>
+                        <!-- FILE LIST -->
+                        <div ng-if="show_content" ng-repeat="file in folder.files | filter:searchfilter.file | orderBy:'name'" layout="row" layout-align="left center" ng-init="show_content = true">
+                            <span flex="10"> <!-- INDENT FILE LIST --> </span>
+                            <!-- FIlE -->
+                            <md-button class="md-raised md-primary" aria-label="get file details" ng-href="{{::app.url + 'data/' + domain.name + '/' + folder.name + '/' + file.name}}" target="_blank">
+                                <md-icon md-font-library="material-icons" class="md-light">insert_drive_file</md-icon>
+                                {{::file.name}}
+                            </md-button>
+                            <!-- DELETE FILE BUTTON -->
+                            <md-button class="md-icon-button md-raised md-warn" aria-label="delete this file" ng-click="delete_file(domain, folder, file)">
+                                <md-tooltip> Delete this file </md-tooltip>
+                                <md-icon md-font-library="md-icon-button material-icons" class="md-light">delete</md-icon>
+                            </md-button>
+                            <!-- DOWNLOAD FILE BUTTON -->
+                            <md-button class="md-icon-button md-raised md-primary" aria-label="download this file" ng-href="{{::app.url + 'data/' + domain.name + '/' + folder.name + '/' + file.name}}" target="_blank" download>
+                                <md-tooltip> Download this file </md-tooltip>
+                                <md-icon md-font-library="md-icon-button material-icons" class="md-light">file_download</md-icon>
+                            </md-button>
+                            <!-- SWAGGER UI VIEW BUTTON -->
+                            <md-button class="md-icon-button md-raised md-primary" aria-label="view this file in swagger ui" ng-href="{{::swagger_ui_url + app.url + 'data/' + domain.name + '/' + folder.name + '/' + file.name}}" target="_blank" download>
+                                <md-tooltip> View this file in Swagger UI </md-tooltip>
+                                <md-icon md-font-library="md-icon-button material-icons" class="md-light">open_in_browser</md-icon>
+                            </md-button>
+                            <!-- FILE URL FIELD -->
+                            <input ng-if="show_content" flex read-only name="file path" value="{{::app.url + 'data/' + domain.name + '/' + folder.name + '/' + file.name}}" placeholder="Error ?!">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </md-content>
+        <!-- JAVASCRIPT SCRIPTS -->
+        <script src="RSC/JS/dep/angular.min.js"></script>
+        <script src="RSC/JS/dep/angular-animate.min.js"></script>
+        <script src="RSC/JS/dep/angular-aria.min.js"></script>
+        <script src="RSC/JS/dep/angular-material.min.js"></script>
+        <script src="RSC/JS/myapp.js"></script>
+        <!--    (╯°□°）╯ ︵ ┻━┻    -->
+    </body>
+</html>

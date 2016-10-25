@@ -1,0 +1,33 @@
+<md-dialog aria-label="Delete folder dialog" flex-xl="60" flex="100">
+    <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+            <h1 class="md-flex"> Delete "{{::domain.name + '/' + folder.name}}" </h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <!-- CONTENT -->
+            <div layout="row" layout-margin layout-padding layout-align="center center">
+                <h2>
+                    <md-icon md-font-library="material-icons" class="md-light">warning</md-icon>
+                    You'll delete the "{{::domain.name + '/' + folder.name}}" folder and all its content !
+                </h2>
+            </div>
+            <h4 align="center" ng-if="err_msg">
+                <md-icon md-font-library="material-icons" class="md-light">warning</md-icon>
+                <span ng-bind="err_msg"></span>
+            </h4>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="delete_request()" class="md-raised md-warn">
+            <md-icon md-font-library="material-icons" class="md-light">delete_forever</md-icon>
+            Delete
+        </md-button>
+        <md-button ng-click="closeDialog()" class="md-raised md-primary">
+            <md-icon md-font-library="material-icons" class="md-light">close</md-icon>
+            Cancel
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

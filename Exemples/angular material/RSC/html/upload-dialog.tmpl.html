@@ -1,0 +1,40 @@
+<md-dialog aria-label="Upload dialog" flex-xl="60" flex="100">
+    <md-toolbar class="md-warn">
+        <div class="md-toolbar-tools">
+            <h1 class="md-flex"> Upload to "{{::domain.name + '/' + folder.name}}" </h1>
+            <span flex></span>
+        </div>
+    </md-toolbar>
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <!-- CONTENT -->
+            <md-subheader class="md-primary">
+                You'll upload a file into "{{::domain.name + '/' + folder.name}}" folder
+            </md-subheader>
+            <div layout="row" layout-margin layout-padding layout-align="center center">
+                <label class="md-primary md-raised md-button" md-ink-ripple for="fileInput">
+                    <md-icon md-font-library="material-icons" class="md-light">search</md-icon>
+                    <span> Select a file </span>
+                </label>
+                <md-input-container flex class="md-block">
+                    <input aria-label="file name" ng-model="file_name" readonly></input>
+                </md-input-container>
+            </div>
+            <input flex="0" id="fileInput" type="file" accept=".json" style="visibility:hidden" onchange="angular.element(this).scope().choose_file(this)">
+            <h4 align="center" ng-if="err_msg">
+                <md-icon md-font-library="material-icons" class="md-light">warning</md-icon>
+                <span ng-bind="err_msg"></span>
+            </h4>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions>
+        <md-button ng-click="upload_file()" class="md-raised md-primary">
+            <md-icon md-font-library="material-icons" class="md-light">file_upload</md-icon>
+            Create
+        </md-button>
+        <md-button ng-click="closeDialog()" class="md-raised md-warn">
+            <md-icon md-font-library="material-icons" class="md-light">close</md-icon>
+            Close
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>
