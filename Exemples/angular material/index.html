@@ -9,11 +9,26 @@
         <title ng-bind="app.name + ' ' + app.version"></title>
     </head>
     <body ng-cloak>
-        <!-- NAME AND VERSION -->
+        <!-- MENU -->
+        <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
+          <md-toolbar class="md-warn">
+            <div class="md-toolbar-tools">
+              <md-button class="md-icon-button md-raised md-primary" aria-label="fermer le menu" ng-click="toggleLeft()" target="_blank">
+                <md-icon md-font-library="material-icons" class="md-light">close</md-icon>
+              </md-button>
+              <h1 class="md-toolbar-tools">Menu</h1>
+            </div>
+          </md-toolbar>
+          <md-content layout-margin>
+            <p>
+              menu
+            </p>
+          </md-content>
+        </md-sidenav>
+        <!-- TITRE -->
         <md-toolbar class="md-warn">
             <div class="md-toolbar-tools">
-                <md-button class="md-icon-button md-raised md-primary" aria-label="source du projet" ng-href="{{::app.project_source}}" target="_blank">
-                    <md-tooltip md-direction="left"> Sources du project </md-tooltip>
+                <md-button class="md-icon-button md-raised md-primary" aria-label="ouvrir le menu" ng-click="toggleLeft()" target="_blank">
                     <md-icon md-font-library="material-icons" class="md-light">menu</md-icon>
                 </md-button>
                 <h1 ng-bind="app.name + ' ' + app.version"></h1>
@@ -24,23 +39,55 @@
                 </md-button>
             </div>
         </md-toolbar>
-        <!-- LOADING BAR -->
+        <!-- BARRE CHARGEMENT -->
         <md-progress-linear ng-if="loading" md-mode="query"></md-progress-linear>
-        <!-- CONTENT -->
+        <!-- CONTENU -->
         <md-content class="md-padding">
             <!-- DESCRIPTION -->
-            <section ng-if="app.description">
-                <md-subheader class="md-primary">
-                    {{::app.description}}
-                </md-subheader>
+            <section layout-margin layout-padding ng-if="app.description">
+                <md-subheader class="md-primary" ng-bind="app.description"></md-subheader>
             </section>
-            <!-- LIST ZONE -->
+	    <md-divider></md-divider>
+            <!-- ANNONCES -->
             <section flex layout-wrap layout="column">
-                <md-subheader class="md-warn">
-                    Bienvenue !
-                </md-subheader>
-                <!-- DOMAIN LIST -->
                 <div layout="column" layout-margin layout-padding>
+			<md-card>
+			  <md-card-title>
+			    <md-card-title-media>
+			      <div class="md-media-sm card-media" layout>
+				<md-icon class="material-icons">warning</md-icon>
+			      </div>
+			    </md-card-title-media>
+			    <md-card-title-text>
+			      <span class="md-headline"> Annonce </span>
+			      <span class="md-subhead description">Ipsum lorem caveat emptor...</span>
+			    </md-card-title-text>
+			  </md-card-title>
+			</md-card>
+                </div>
+            </section>
+	    <md-divider></md-divider>
+            <!-- CONTENU PRINCIPAL -->
+            <section flex layout-wrap layout-margin layout-padding layout="column">
+            	<!-- BOUTONS -->
+                <div layout="row" layout-margin layout-padding layout-align="center">
+		      <md-button flex class="md-raised md-primary">
+			 <md-icon class="material-icons">hotel</md-icon>
+			 Dormir
+		      </md-button>
+		      <md-button flex class="md-raised md-primary">
+			 <md-icon class="material-icons">restaurant</md-icon>
+			 Manger
+		      </md-button>
+		      <md-button flex class="md-raised md-primary">
+			 <md-icon class="material-icons">add_box</md-icon>
+			 Soigner
+		      </md-button>
+                </div>
+	        <md-divider></md-divider>
+            	<!-- CARTE -->
+                <div layout="column">
+			<img style="width:100%; height:auto"src="http://actu.meilleurmobile.com/wp-content/uploads/2016/08/hollywood-district-in-portland-Google-Maps.jpg"></img>
                 </div>
             </section>
         </md-content>
@@ -53,3 +100,4 @@
         <!--    (╯°□°）╯ ︵ ┻━┻    -->
     </body>
 </html>
+
