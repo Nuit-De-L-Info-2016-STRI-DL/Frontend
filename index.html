@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="RSC/css/angular-material.min.css">
-        <link rel="stylesheet" href="RSC/css/css-family=Roboto-200,300,400,600.css">
-        <link rel="stylesheet" href="RSC/css/icon-family-Material+Icons.css">
+        <link rel="stylesheet" href="static/RSC/css/angular-material.min.css">
+        <link rel="stylesheet" href="static/RSC/css/css-family=Roboto-200,300,400,600.css">
+        <link rel="stylesheet" href="static/RSC/css/icon-family-Material+Icons.css">
         <title ng-bind="app.name + ' ' + app.version"></title>
     </head>
     <body ng-cloak>
@@ -42,8 +42,8 @@
         </md-toolbar>
         <!-- BARRE CHARGEMENT -->
         <md-progress-linear ng-if="loading" md-mode="query"></md-progress-linear>
-        <!-- CONTENU -->
-        <md-content class="md-padding">
+        <!-- CONTENU PRINCIPAL -->
+        <md-content class="md-padding" ng-if="main_page">
             <!-- DESCRIPTION -->
             <section layout-margin ng-if="app.description">
                 <md-subheader class="md-primary" ng-bind="app.description"></md-subheader>
@@ -68,7 +68,7 @@
                 </div>
             </section>
 	    <md-divider></md-divider>
-            <!-- CONTENU PRINCIPAL -->
+            <!-- CONTENU -->
             <section flex layout-wrap layout="column">
             	<!-- BOUTONS -->
                 <div layout="column" layout-gt-xs="row" layout-align="center">
@@ -98,12 +98,38 @@
 		    </div>
             </section>
         </md-content>
+        <!-- CONTENU PRINCIPAL -->
+        <md-content class="md-padding" ng-if="contact_page">
+            <!-- DESCRIPTION -->
+            <section layout-margin ng-if="app.description">
+                <md-subheader class="md-primary" ng-bind="app.description"></md-subheader>
+            </section>
+	    <md-divider></md-divider>
+            <!-- ANNONCES -->
+            <section flex layout-wrap layout="column">
+                <div layout="column">
+			<md-card>
+			  <md-card-title>
+			    <md-card-title-media>
+			      <div class="md-media-sm card-media" layout>
+				<md-icon class="material-icons">warning</md-icon>
+			      </div>
+			    </md-card-title-media>
+			    <md-card-title-text>
+			      <span class="md-headline"> Annonce </span>
+			      <span class="md-subhead description">Ipsum lorem caveat emptor...</span>
+			    </md-card-title-text>
+			  </md-card-title>
+			</md-card>
+                </div>
+            </section>
+        </md-content>
         <!-- JAVASCRIPT SCRIPTS -->
-        <script src="RSC/JS/dep/angular.min.js"></script>
-        <script src="RSC/JS/dep/angular-animate.min.js"></script>
-        <script src="RSC/JS/dep/angular-aria.min.js"></script>
-        <script src="RSC/JS/dep/angular-material.min.js"></script>
-        <script src="RSC/JS/myapp.js"></script>
+        <script src="static/RSC/JS/dep/angular.min.js"></script>
+        <script src="static/RSC/JS/dep/angular-animate.min.js"></script>
+        <script src="static/RSC/JS/dep/angular-aria.min.js"></script>
+        <script src="static/RSC/JS/dep/angular-material.min.js"></script>
+        <script src="static/RSC/JS/myapp.js"></script>
         <!--    (╯°□°）╯ ︵ ┻━┻    -->
     </body>
 </html>

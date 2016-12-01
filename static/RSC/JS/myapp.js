@@ -12,6 +12,7 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
 
     // other vars :
     $scope.loading = 0;  // loading bar state (0: disabled, !=0 : there is a request pending)
+    $scope.main_page = true;
 
     // menu
     $scope.toggleLeft = buildToggler('left');
