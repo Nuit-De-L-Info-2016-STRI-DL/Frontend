@@ -44,13 +44,13 @@
         <!-- CONTENU -->
         <md-content class="md-padding">
             <!-- DESCRIPTION -->
-            <section layout-margin layout-padding ng-if="app.description">
+            <section layout-margin ng-if="app.description">
                 <md-subheader class="md-primary" ng-bind="app.description"></md-subheader>
             </section>
 	    <md-divider></md-divider>
             <!-- ANNONCES -->
             <section flex layout-wrap layout="column">
-                <div layout="column" layout-margin layout-padding>
+                <div layout="column">
 			<md-card>
 			  <md-card-title>
 			    <md-card-title-media>
@@ -68,9 +68,9 @@
             </section>
 	    <md-divider></md-divider>
             <!-- CONTENU PRINCIPAL -->
-            <section flex layout-wrap layout-margin layout-padding layout="column">
+            <section flex layout-wrap layout="column">
             	<!-- BOUTONS -->
-                <div layout="row" layout-margin layout-padding layout-align="center">
+                <div layout="column" layout-gt-xs="row" layout-align="center">
 		      <md-button flex class="md-raised md-primary">
 			 <md-icon class="material-icons">hotel</md-icon>
 			 Dormir
@@ -90,9 +90,11 @@
                 </div>
 	        <md-divider></md-divider>
             	<!-- CARTE -->
-                <div layout="column">
-			<img style="width:100%; height:auto"src="http://actu.meilleurmobile.com/wp-content/uploads/2016/08/hollywood-district-in-portland-Google-Maps.jpg"></img>
-                </div>
+		    <div layout-margin layout-padding>
+		        <div layout="column">
+				<img style="width:100%; height:auto"src="http://actu.meilleurmobile.com/wp-content/uploads/2016/08/hollywood-district-in-portland-Google-Maps.jpg"></img>
+		        </div>
+		    </div>
             </section>
         </md-content>
         <!-- JAVASCRIPT SCRIPTS -->
