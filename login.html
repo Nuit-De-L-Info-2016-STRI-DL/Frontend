@@ -31,19 +31,21 @@
             </section>
 	    <md-divider></md-divider>
             <!-- FORM -->
-            <div layout-margin layout-padding layout="column" layout-align="center center">
-	      <md-input-container>
-		<label>Identifiant</label>
-      		<md-icon class="material-icons">account_circle</md-icon>
-		<input ng-model="user.login" type="text">
-	      </md-input-container>
-	      <md-input-container>
-		<label>Mot de passe</label>
-      		<md-icon class="material-icons">vpn_key</md-icon>
-		<input ng-model="user.password" type="password">
-	      </md-input-container>
-	      <md-button class="md-raised md-primary">Connexion</md-button>
-	    </div>
+	    <form action="/auth/login" method="post">
+              <div layout-margin layout-padding layout="column" layout-align="center center">
+	        <md-input-container>
+		  <label>Identifiant</label>
+      		  <md-icon class="material-icons">account_circle</md-icon>
+		  <input ng-model="user.login" type="text">
+	        </md-input-container>
+	        <md-input-container>
+		  <label>Mot de passe</label>
+      		  <md-icon class="material-icons">vpn_key</md-icon>
+		  <input ng-model="user.password" type="password">
+	        </md-input-container>
+	        <md-button type="submit" class="md-raised md-primary">Connexion</md-button>
+	      </div>
+	    </form>
         </md-content>
         <!-- JAVASCRIPT SCRIPTS -->
         <script src="RSC/JS/dep/angular.min.js"></script>
