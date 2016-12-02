@@ -27,17 +27,18 @@
             </section>
 	    <md-divider></md-divider>
             <!-- FORM -->
-	    <form action="/auth/login" method="post">
+	    <form name="connection" action="login" method="post">
+	      {% module xsrf_form_html() %}
               <div layout-margin layout-padding layout="column" layout-align="center center">
 	        <md-input-container>
 		  <label>Identifiant</label>
       		  <md-icon class="material-icons">account_circle</md-icon>
-		  <input name="username" type="text">
+		  <input name="username" required type="text">
 	        </md-input-container>
 	        <md-input-container>
 		  <label>Mot de passe</label>
       		  <md-icon class="material-icons">vpn_key</md-icon>
-		  <input name="password" type="password">
+		  <input name="password" required type="password">
 	        </md-input-container>
 	        <md-button type="submit" class="md-raised md-primary">Connexion</md-button>
 	      </div>
