@@ -6,6 +6,7 @@
         <link rel="stylesheet" href="static/RSC/css/angular-material.min.css">
         <link rel="stylesheet" href="static/RSC/css/css-family=Roboto-200,300,400,600.css">
         <link rel="stylesheet" href="static/RSC/css/icon-family-Material+Icons.css">
+        <link rel="stylesheet" href="static/RSC/css/index.css">
         <title ng-bind="app.name + ' ' + app.version"></title>
     </head>
     <body ng-cloak>
@@ -90,12 +91,9 @@
 		      </md-button>
                 </div>
 	        <md-divider></md-divider>
-            	<!-- CARTE -->
-		    <div layout-margin layout-padding>
-		        <div layout="column">
-				<img style="width:100%; height:auto"src="http://actu.meilleurmobile.com/wp-content/uploads/2016/08/hollywood-district-in-portland-Google-Maps.jpg"></img>
-		        </div>
-		    </div>
+                <!-- CARTE -->
+                <div layout="column" id="map"></div>
+
             </section>
         </md-content>
         <!-- CONTENU PRINCIPAL -->
@@ -125,12 +123,15 @@
             </section>
         </md-content>
         <!-- JAVASCRIPT SCRIPTS -->
+        <script src="static/RSC/JS/dep/jquery-3.1.1.min.js"></script>
         <script src="static/RSC/JS/dep/angular.min.js"></script>
         <script src="static/RSC/JS/dep/angular-animate.min.js"></script>
         <script src="static/RSC/JS/dep/angular-aria.min.js"></script>
         <script src="static/RSC/JS/dep/angular-material.min.js"></script>
         <script src="static/RSC/JS/myapp.js"></script>
-        <!--    (╯°□°）╯ ︵ ┻━┻    -->
+        <script src="static/RSC/JS/mapIntegration.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsHDDNiwPZMowG868LTs3PVc3AHpvKFg&callback=initMap"
+                async defer></script>
     </body>
 </html>
 
