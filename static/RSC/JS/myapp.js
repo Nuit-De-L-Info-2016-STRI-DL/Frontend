@@ -15,6 +15,7 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
     $scope.refresh_annonces = function() {
         $http.get('/annonce').then(function (response) { // on success
             $scope.annonces = response.data.annonces;
+            setTimeout(function(){ $scope.refresh_annonces; }, 3000);
         }, function (response) { // on error
             console.log(response);
         });
@@ -30,6 +31,9 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
             data: new_annonce
         }).then(function (response) { // on success
             $scope.annonces = response.data.annonces;
+            $scope.main_page=true;
+            $scope.annonce_page=false;
+            $scope.contact_page=false;
         }, function (response) { // on error
             console.log(response);
         });
