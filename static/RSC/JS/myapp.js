@@ -6,7 +6,6 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
     $scope.app = {};
     $scope.app.name = "Pas de toit pas de chocolat";
     $scope.app.version = "v0.1";
-    $scope.app.description = "description";
     $scope.app.url = $location.absUrl();
 
     // other vars :
