@@ -14,9 +14,21 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
     $scope.main_page = true;
 
     $scope.refresh_annonces = function() {
+        $http.get('/annonce').then(function (response) { // on success
+            $scope.annonces = response.data.annonces;
+        }, function (response) { // on error
+            console.log(response);
+        });
+    };
+
+    $scope.push_annonces = function() {
+    	if(!$scope.new_annonce || !$scope.new_annonce.title || !$scope.new_annonce.description) {
+    	    return;
+    	}
         $http({
-            method: 'GET',
-            url: '/annonce'
+            method: 'POST',
+            url: '/annonce',
+            data: $scope.new_annonce
         }).then(function (response) { // on success
             $scope.annonces = response.data.annonces;
         }, function (response) { // on error
