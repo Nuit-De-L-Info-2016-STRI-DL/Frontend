@@ -30,7 +30,6 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
             url: '/annonce',
             data: new_annonce
         }).then(function (response) { // on success
-            $scope.annonces = response.data.annonces;
             $scope.main_page=true;
             $scope.annonce_page=false;
             $scope.contact_page=false;
