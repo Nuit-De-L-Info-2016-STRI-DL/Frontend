@@ -52,16 +52,16 @@
             <!-- ANNONCES -->
             <section flex layout-wrap layout="column">
                 <div layout="column">
-			<md-card>
+			<md-card ng-repeat="annonce in annonces">
 			  <md-card-title>
 			    <md-card-title-media>
 			      <div class="md-media-sm card-media" layout>
-				<md-icon class="material-icons">warning</md-icon>
+				<md-icon class="material-icons">info</md-icon>
 			      </div>
 			    </md-card-title-media>
 			    <md-card-title-text>
-			      <span class="md-headline"> Annonce </span>
-			      <span class="md-subhead description">Ipsum lorem caveat emptor...</span>
+			      <span class="md-headline" ng-bind="annonce.title"></span>
+			      <span class="md-subhead description" ng-bind="annonce.description"></span>
 			    </md-card-title-text>
 			  </md-card-title>
 			</md-card>
@@ -71,7 +71,7 @@
             <!-- CONTENU -->
             <section flex layout-wrap layout="column">
             	<!-- BOUTONS -->
-                <div layout="column" layout-gt-xs="row" layout-align="center">
+                <div layout="column" layout-gt-xs="row" layout-align="center center">
 		      <md-button flex class="md-raised md-primary">
 			 <md-icon class="material-icons">hotel</md-icon>
 			 Dormir
@@ -91,8 +91,9 @@
                 </div>
 	        <md-divider></md-divider>
                 <!-- CARTE -->
-                <div layout="column" id="map"></div>
-
+                <div layout="column" layout-align="center" layout-margin layout-padding>
+			<div id="map"></div>
+		</div>
             </section>
         </md-content>
         <!-- CONTENU PRINCIPAL -->

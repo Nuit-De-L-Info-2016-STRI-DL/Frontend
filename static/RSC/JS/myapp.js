@@ -13,6 +13,17 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
     $scope.loading = 0;  // loading bar state (0: disabled, !=0 : there is a request pending)
     $scope.main_page = true;
 
+    $scope.refresh_annonces = function() {
+        $http({
+            method: 'GET',
+            url: '/annonce'
+        }).then(function (response) { // on success
+            $scope.annonces = response.annonces;
+        }, function (response) { // on error
+            console.log(response);
+        });
+    };
+
     // menu
     $scope.toggleLeft = buildToggler('left');
     function buildToggler(componentId) {
@@ -20,6 +31,9 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
         $mdSidenav(componentId).toggle();
       }
     };
+
+    // au demarage, rafraichir les données
+    $scope.refresh_annonces();
 });
 
 // IE support
