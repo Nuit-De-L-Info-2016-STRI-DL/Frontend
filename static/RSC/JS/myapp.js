@@ -21,14 +21,14 @@ myapp.controller('mainControl', function($scope, $http, $mdDialog, $mdSidenav, $
         });
     };
 
-    $scope.push_annonces = function() {
-    	if(!$scope.new_annonce || !$scope.new_annonce.title || !$scope.new_annonce.description) {
+    $scope.push_annonces = function(new_annonce) {
+    	if(!new_annonce || !new_annonce.title || !new_annonce.description) {
     	    return;
     	}
         $http({
             method: 'POST',
             url: '/annonce',
-            data: $scope.new_annonce
+            data: new_annonce
         }).then(function (response) { // on success
             $scope.annonces = response.data.annonces;
         }, function (response) { // on error
