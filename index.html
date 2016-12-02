@@ -14,7 +14,7 @@
         <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop md-whiteframe="4">
           <md-toolbar class="md-warn">
             <div class="md-toolbar-tools">
-              <md-button class="md-icon-button md-raised md-primary" aria-label="fermer le menu" ng-click="toggleLeft()" target="_blank">
+              <md-button class="md-icon-button md-raised md-primary" aria-label="fermer le menu" ng-click="toggleLeft()">
                 <md-icon md-font-library="material-icons" class="md-light">close</md-icon>
 	        Fermer
               </md-button>
@@ -22,9 +22,12 @@
             </div>
           </md-toolbar>
           <md-content layout-margin>
-            <p>
-              menu
-            </p>
+            <div layout="column">
+              <md-button class="md-button md-raised md-primary" aria-label="se connecter" ng-href="/auth/login" target="_blank">
+                <md-icon md-font-library="material-icons" class="md-light">lock_open</md-icon>
+	        Connexion
+              </md-button>
+            </div>
           </md-content>
         </md-sidenav>
         <!-- TITRE -->
@@ -126,8 +129,7 @@
         <script src="static/RSC/JS/dep/angular-material.min.js"></script>
         <script src="static/RSC/JS/myapp.js"></script>
         <script src="static/RSC/JS/mapIntegration.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsHDDNiwPZMowG868LTs3PVc3AHpvKFg&callback=initMap"
-                async defer></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUsHDDNiwPZMowG868LTs3PVc3AHpvKFg&callback=initMap" async defer></script>
     </body>
 </html>
 
