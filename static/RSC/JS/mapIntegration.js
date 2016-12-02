@@ -12,6 +12,13 @@ function getLocation() {
                 scrollwheel: true,
                 zoom: 15
             });
+            var myPos = {lat: position.coords.latitude, lng: position.coords.longitude};
+            var marker = new google.maps.Marker({
+                position: myPos,
+                map: map,
+                title: 'UserPosition'
+            });
+
         });
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
